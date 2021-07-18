@@ -44,9 +44,17 @@ func (c *CmdJob) Start() error {
 		if err != nil {
 			io.WriteString(c.w, err.Error())
 		}
-		close(c.done)
+		closeChan(c.done)
 	}()
 	return nil
+}
+
+func closeChan(ch chan struct{}) {
+	select {
+	case <-ch:
+	default:
+		close(ch)
+	}
 }
 
 func (c *CmdJob) Stop() error {
@@ -54,7 +62,7 @@ func (c *CmdJob) Stop() error {
 		return consts.HasStop
 	}
 	err := c.cmd.Process.Kill()
-	close(c.done)
+	closeChan(c.done)
 	return err
 }
 
