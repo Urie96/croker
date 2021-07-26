@@ -8,7 +8,7 @@ before:
 build:
   main: main.go
   binary: croker
-  ldflags: -s -w -X github.com/urie96/croker/version.Version=v{{.Version}}
+  ldflags: -s -w -X github.com/urie96/croker/version.Version={{.Version}} -X github.com/urie96/croker/version.Commit={{.FullCommit}}
   env:
     - CGO_ENABLED=0
   goos:
