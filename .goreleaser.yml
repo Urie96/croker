@@ -1,0 +1,31 @@
+# This is an example .goreleaser.yml file with some sane defaults.
+# Make sure to check the documentation at http://goreleaser.com
+project_name: croker
+before:
+  hooks:
+    # You may remove this if you don't use go modules.
+    - go mod tidy
+build:
+  main: main.go
+  binary: croker
+  ldflags: -s -w -X github.com/urie96/croker/version.Version="{{.Version}}-{{.CommitTimestamp}}"
+  env:
+    - CGO_ENABLED=0
+  goos:
+    - linux
+    - darwin
+archives:
+  - replacements:
+      darwin: macOS
+      linux: Linux
+      windows: Windows
+      386: 32bit
+      amd64: 64bit
+checksum:
+  name_template: 'checksums.txt'
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'

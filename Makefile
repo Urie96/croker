@@ -1,14 +1,10 @@
 .PHONE: all install
 
 croker=$(shell which croker)
-crokerd=$(shell which crokerd)
 
 all: install
 
-install: $(croker) $(crokerd)
+install: $(croker)
 
-$(croker): $(shell find croker -name \*.go)
-	go get github.com/urie96/croker/croker
-
-$(crokerd): $(shell find crokerd -name \*.go)
-	go get github.com/urie96/croker/crokerd
+$(croker): $(shell find . -name \*.go)
+	go get -ldflags="-w -s -X github.com/urie96/croker/version.Version=0.0.0" github.com/urie96/croker

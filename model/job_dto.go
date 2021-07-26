@@ -40,3 +40,9 @@ type ServerVersionResponse struct {
 	BaseResponse
 	Version string `json:"version"`
 }
+
+type GetServerDetailResponse struct {
+	BaseResponse
+	Status  string `json:"status"`
+	Version string `json:"version"`
+}

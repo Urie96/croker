@@ -36,9 +36,9 @@ world
 ## Installation
 
 ```bash
-go get github.com/urie96/croker/crokerd
+go get github.com/urie96/croker/server
 go get github.com/urie96/croker/croker
-crokerd # start the daemon progress
+server # start the daemon progress
 ```
 
 ## Usage
